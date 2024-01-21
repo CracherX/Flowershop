@@ -3,6 +3,14 @@
 <main class="main-content-catalog">
     <div class="container-lg">
         <div class="main__title">Каталог цветов</div>
+        <div class="dropdown">
+            <button onclick="toggleDropdown()" class="dropbtn">Сортировка</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="{% url 'catalog' category_id=category_id sort='price'%}">Цена↑</a>
+                <a href="{% url 'catalog' category_id=category_id sort='-price'%}">Цена↓</a>
+                <a href="{% url 'catalog' category_id=category_id sort='goods_sold'%}">Релевантность</a>
+            </div>
+        </div>
         <div class="row catalog-start">
             <div class="catalog-category col-md-3">
                 <div class="categories">
