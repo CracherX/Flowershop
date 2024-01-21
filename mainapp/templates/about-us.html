@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="about-us">
+    <div class="container mt-5">
+        <h1 class="text-center about-us__text">Добро пожаловать в Plantify</h1>
+        <p class="text-center about-us__text">
+            Plantify - это магазин цветов, где каждый цветок рассказывает свою уникальную историю.
+            Мы создаем волшебные моменты с помощью красоты природы и стараемся сделать ваш опыт выбора
+            и подарка цветов особенным и запоминающимся.
+        </p>
+        <div class="text-center mt-4">
+            <img src="{% static 'img/logo.svg' %}" alt="Flower Shop" class="img-fluid">
+        </div>
+        <h2 class="mt-5">Наши контакты</h2>
+        <ul>
+            <li>Email: <a href="mailto:Plantify@mail.ru">Plantify@mail.ru</a></li>
+            <li>Телефон: <a href="tel:+7920090603">+661-61-63-136</a></li>
+        </ul>
+
+        <div class="mt-5">
+            <h2>Где нас найти</h2>
+            <p>
+                Мы находимся по адресу: <strong>Улица: Киева, Город Калуга, Россия, дом 108, офисное помещение номер 40</strong>.
+            </p>
+        </div>
+
+        <!-- Карта Google -->
+        <div class="embed-responsive embed-responsive-16by9 mt-5">
+            <iframe class="embed-responsive-item"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50000.12814492759!2d-74.0066105551381!3d40.71277653582091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2588f046ee661%3A0xe33a9c803a7ce3c6!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1639094760326!5m2!1sen!2s"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+{% endblock %}

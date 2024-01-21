@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="intro">
+    <div class="container-lg">
+        <div class="row">
+            <div class="text-nav col-12 col-md-6">
+                <div class="intro__text">Счастье расцветает изнутри</div>
+                <div class="intro__text-below"><p>Наша окружающая среда, мир, в котором мы живем и работаем, является
+                    зеркалом наших взглядов и ожиданий.</p></div><!-- кнопка шоп (для даунов) -->
+                <div class="btn"><a href="{% url 'catalog' %}">Каталог</a></div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="row">
+                    <div class="col-md-4 mr-2">
+                        <div class="img-1"><img src="{% static 'img/img-1.png' %}" alt="" class="img-fluid"></div>
+                        <div class="img-2"><img src="{% static 'img/img-2.png' %}" alt="" class="img-fluid"></div>
+                    </div>
+                    <div class="col-md-6 p-0">
+                        <div class="img-3"><img src="{% static 'img/img-3.png' %}" alt="" class="img-fluid big-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 pr-0">
+                <div class="img-4"><img src="img/img-4.png" alt="" class="img-fluid"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<main class="main">
+    <div class="container-lg">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                {% for product in popular_products %}
+                    <div class="swiper-slide">
+                        <div class="card" style="width: 20rem">
+                            <a href="{% url 'product_detail' product_id=product.pk %}">
+                                <img src="{{ product.picture.url }}" class="card-img-top" alt="{{ product.name }}">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                                </h5>
+                                <p class="card-text">Цена: {{ product.price }} руб.</p>
+                            </div>
+                            <a href="{% url 'add_to_cart' product.id %}" class="card__btn">Добавить в корзину</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+<section class="ship">
+    <div class="container-lg">
+        <div class="shipping__card position-relative"><img src="{% static 'img/shipping_image.png' %}" alt="">
+            <div class="ship__card-text position-absolute top-50 start-0 translate-start">
+                <div class="ship__card-title">Бесплатная доставка</div>
+                <div class="ship__card-title-below">По России</div>
+                <div class="ship__card-contacts"><a href="" class="phone">+62 1189-2719-00</a> <a href="" class="email">order@platify.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

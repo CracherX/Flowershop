@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="profile">
+    <div class="container d-flex align-items-center justify-content-center vh-100">
+        <div class="card" style="width: 18rem">
+            <img src="{{ user.avatar.url }}" class="card-img-top img-fluid" alt="Аватар">
+            <div class="card-body">
+                <h5 class="card-title">Имя пользователя: {{ user.username }}</h5>
+                <div class="card__text">
+                    <p class="card-text">Email: {{ user.email }}</p>
+                    <p class="card-text">Номер телефона: {{ user.phone_number }}</p>
+                    <p class="card-text">Адрес: {{ user.address }}</p>
+                    <p class="card-text">Дата рождения: {{ user.birthday }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

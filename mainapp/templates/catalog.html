@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="main-content-catalog">
+    <div class="container-lg">
+        <div class="main__title">Каталог цветов</div>
+        <div class="row catalog-start">
+            <div class="catalog-category col-md-3">
+                <div class="categories">
+                    <div class="category"><a href="{% url 'catalog' category_id='all' %}">Все товары</a></div>
+                    {% for category in categories %}
+                    <div class="category"><a href="{% url 'catalog' category_id=category.pk %}">{{ category.category_name }}</a></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    {% for product in product_list %}
+                    <div class="catalog__item-card col-md-4">
+                        <div class="card" style="width: 20rem">
+                            <img src="{{ product.picture.url }}" class="card-img-top" alt="{{ product.name }}">
+                            <div class="card-body">
+                                <div class="card-desc">
+                                    <h5 class="card-title">
+                                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                                    </h5>
+                                    <h5 class="price">{{ product.price }} руб.</h5>
+                                </div>
+                            </div>
+                            <a href="{% url 'add_to_cart' product.id %}" class="card__btn">Добавить в корзину</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="pagination justify-content-center">
+                    <ul class="pagination">
+                        {% if product_list.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1">&laquo; первая</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ product_list.previous_page_number }}">предыдущая</a>
+                        </li>
+                        {% endif %}
+
+                        <li class="page-item disabled">
+            <span class="page-link">
+                Страница {{ product_list.number }} из {{ product_list.paginator.num_pages }}.
+            </span>
+                        </li>
+
+                        {% if product_list.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ product_list.next_page_number }}">следующая</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ product_list.paginator.num_pages }}">последняя
+                                &raquo;</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
