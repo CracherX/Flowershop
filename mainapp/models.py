@@ -5,7 +5,7 @@ from django.db import models
 class Product(models.Model):
     name = models.CharField('Название товара', max_length=20, unique=True)
     price = models.DecimalField('Цена товара', max_digits=15, decimal_places=2)
-    picture = models.ImageField('Картинка товара', upload_to='serveruploads', default='serveruploads/standard.png')
+    picture = models.ImageField('Картинка товара', upload_to='serveruploads', default='serveruploads/standard.jpg')
     description = models.TextField('Описание товара', default='Дополнительное описание отсутствует')
     product_type = models.ForeignKey('Product_type', on_delete=models.CASCADE, verbose_name='Категория товара')
     goods_sold = models.IntegerField('Продано всего', default=0)

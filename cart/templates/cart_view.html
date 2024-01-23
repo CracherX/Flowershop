@@ -8,7 +8,7 @@
             {% for cart_item in cart.cartitem_set.all %}
                 <div class="cart__card row">
                     <div class="col-md-4 cart__img-item">
-                        <img src="{{ cart_item.product.image.url }}" alt="{{ cart_item.product.name }} Image" class="img-fluid">
+                        <img src="{{ cart_item.product.picture.url }}" alt="{{ cart_item.product.name }} Image" class="img-fluid">
                     </div>
                     <div class="col-md-4 cart__checkout-desc">
                         <p>{{ cart_item.product.name }}</p>

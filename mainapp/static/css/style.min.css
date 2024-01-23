@@ -43,3 +43,51 @@
 .dropbtn{
   border-radius: 5px;
 }
+/* карточка товара */
+ .product-container {
+   display: flex;
+   justify-content: space-between;
+   margin: 20px;
+}
+ .product-container .product-images {
+   max-width: 300px;
+   display: flex;
+   justify-content: center;
+  /*Центрирование по горизонтали*/
+   align-items: center;
+  /*Центрирование по вертикали */
+}
+ .product-container .product-details {
+   flex: 1;
+   margin-left: 20px;
+}
+ .product-container .img-fluid {
+   width: 600px;
+   height: 300px;
+   overflow: hidden;
+   object-fit: cover;
+}
+ .product-container .nigger {
+   padding: 10px;
+   border-radius: 5px;
+   background-color: #dbdbdb;
+}
+ .product-container .card-characteristic {
+   background-color: #dbdbdb;
+   width: 100%;
+   height: 100%;
+   border-radius: 10px;
+   padding: 10px;
+}
+ .product-container .nigger, .product-container p {
+   color: black;
+}
+ .product-container .product-name h2 {
+   font-size: 32px;
+   color: black;
+   font-family: Roboto;
+}
+ .product-container .card-page__btn {
+   background-color: #004f44;
+   border: none;
+}
