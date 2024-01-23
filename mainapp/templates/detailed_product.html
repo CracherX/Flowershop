@@ -1,0 +1,36 @@
+   {% extends 'base.html' %}
+   {% block content %}
+   </style>
+    <div class="main-content">
+      <div class="container">
+        <div class="product-container">
+          <div class="product-images">
+            <div class="hui2">
+              <img
+                src="{{product.picture.url}}"
+                alt="Large Image"
+                class="img-fluid"
+                id="mainImage"
+              />
+            </div>
+          </div>
+          <div class="product-details">
+            <div class="product-name">
+              <h2>{{product.name}}</h2>
+            </div>
+            <div class="nigger">
+              <h4>Описание товара</h4>
+              <p>
+                {{product.description}}
+              </p>
+              <!-- Добавьте дополнительное описание товара по необходимости -->
+            </div>
+            <div class="nigger mt-2 text-center">{{product.price}} руб.</div>
+            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary btn-lg btn-block mt-2">
+              Добавить в корзину
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+   {% endblock %}
