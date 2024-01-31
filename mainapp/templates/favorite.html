@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <div class="main-content-catalog">
+    <div class="container-lg">
+      <div class="main__title">Ваше избранное</div>
+      <div class="row catalog-start"><!-- начало колонки -->
+        <div class="col-md-12">
+          <div class="favorite-cards row row-cols-4"><!-- начало карточки (для умственно отсталых) -->
+
+            {% for product in favorite_products %}
+              <div class="catalog__item-card col-md-3">
+                <div class="card" style="width: 12rem">
+                  <img src="{{ product.picture.url }}" class="card-img-top" alt="{{ product.name }}">
+                  <a href="{% url 'remove_from_favorite' product.pk %}"><img src="{% static 'img/heart.svg' %}" alt="" class="favorite-card"> </a>
+                  <div class="card-body">
+                    <div class="card-desc">
+                      <h5 class="card-title">{{ product.name }}</h5>
+                      <h5 class="price">{{ product.price }} рублей</h5>
+                    </div>
+                  </div>
+                  <a href="{% url 'product_detail' product_id=product.id %}" class="card__btn">Подробнее</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div><!-- конец колонки  -->
+      </div>
+    </div>
+  </div>
+{% endblock %}

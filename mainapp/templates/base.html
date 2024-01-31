@@ -23,6 +23,7 @@
                     <li><a href="{% url 'homepage' %}">Главная</a></li>
                     <li><a href="{% url 'catalog' %}">Каталог</a></li>
                     <li><a href="{% url 'about' %}">Контакты</a></li>
+                    <li><a href="{% url 'favorite' %}">Избранное</a></li>
                     <!-- начало лого (для даунов) -->
                 </ul><!-- конец залупы с кнопками навигации по сайту -->
             </nav>
@@ -30,6 +31,14 @@
             <!-- конец лого (для даунов) -->
             <ul class="nav-icons"><!-- иконка юзера (для даунов) -->
                 <li><a href="{% url 'profile' %}"><img src="{% static 'img/user.svg' %}" alt=""></a></li><!-- иконка корзины (для даунов) -->
+                <li><form class="d-flex form-inline my-2 my-lg-0">
+                  <input
+                    class="form-control mr-sm-2"
+                    type="search"
+                    placeholder="Поиск товара"
+                    aria-label="Поиск товара"
+                  />
+                </form></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'logout' %}">{{user.username}} (Выйти)</a></li>
                 {% endif %}

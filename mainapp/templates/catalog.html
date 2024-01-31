@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <main class="main-content-catalog">
     <div class="container-lg">
@@ -26,6 +27,14 @@
                     <div class="catalog__item-card col-md-4">
                         <div class="card" style="width: 20rem">
                             <img src="{{ product.picture.url }}" class="card-img-top" alt="{{ product.name }}">
+                            <a href="{% url 'add_to_favorite' product.pk %}">
+                            <img
+                                src="{% static 'img/heart-gray.svg' %}"
+                                alt=""
+                                class="favorite-card"
+                                id="favorite-card"
+                              />
+                            </a>
                             <div class="card-body">
                                 <div class="card-desc">
                                     <h5 class="card-title">

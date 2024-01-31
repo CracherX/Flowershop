@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
 
 
 def homepage(request):
@@ -48,3 +49,35 @@ def detailed_product(request, product_id):
 
 def about(request):
     return render(request, 'about-us.html')
+
+
+@login_required
+def add_to_favorite(request, product_id):
+    user_favorite, created = Favorite.objects.get_or_create(user=request.user)
+    product = get_object_or_404(Product, pk=product_id)
+
+    # Добавляем товар в избранное пользователя
+    user_favorite.products.add(product)
+
+    return redirect('favorite')
+
+
+@login_required
+def view_favorite(request):
+    user_favorite = Favorite.objects.get(user=request.user)
+    favorite_products = user_favorite.products.all()
+    context = {
+        'favorite_products': favorite_products,
+    }
+    return render(request, 'favorite.html', context)
+
+
+@login_required
+def remove_from_favorite(request, product_id):
+    user_favorite = Favorite.objects.get(user=request.user)
+    product = get_object_or_404(Product, pk=product_id)
+
+    # Удаляем товар из избранного пользователя
+    user_favorite.products.remove(product)
+
+    return redirect('favorite')

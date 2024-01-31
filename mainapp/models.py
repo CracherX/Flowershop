@@ -1,5 +1,6 @@
 from django.shortcuts import reverse
 from django.db import models
+from authorize.models import CustomUser
 
 
 class Product(models.Model):
@@ -28,3 +29,14 @@ class Product_type(models.Model):
 
     def __str__(self):
         return self.category_name
+
+
+class Favorite(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='favorite', verbose_name='Пользователь')
+    products = models.ManyToManyField('Product', related_name='favorites', verbose_name='Избранные товары')
+
+    class Meta:
+        verbose_name_plural = 'Избранные товары'
+
+    def __str__(self):
+        return f'Избранные товары пользователя {self.user.username}'
