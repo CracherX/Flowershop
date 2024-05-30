@@ -20,6 +20,10 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    @classmethod
+    def search_by_name(cls, query):
+        return cls.objects.filter(name__icontains=query)
+
 
 class Product_type(models.Model):
     category_name = models.CharField('Название категории', max_length=20)

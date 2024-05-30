@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render, redirect
+Фfrom django.shortcuts import get_object_or_404, render, redirect
 from .models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -49,6 +49,15 @@ def detailed_product(request, product_id):
 
 def about(request):
     return render(request, 'about-us.html')
+
+
+def search(request):
+    query = request.GET.get('srch')
+    if query:
+        results = Product.search_by_name(query)
+    else:
+        results = Product.objects.none()
+    return render(request, 'search.html', {'results': results})
 
 
 @login_required
