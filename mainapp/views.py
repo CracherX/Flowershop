@@ -1,4 +1,4 @@
-Фfrom django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -51,15 +51,6 @@ def about(request):
     return render(request, 'about-us.html')
 
 
-def search(request):
-    query = request.GET.get('srch')
-    if query:
-        results = Product.search_by_name(query)
-    else:
-        results = Product.objects.none()
-    return render(request, 'search.html', {'results': results})
-
-
 @login_required
 def add_to_favorite(request, product_id):
     user_favorite, created = Favorite.objects.get_or_create(user=request.user)
@@ -73,8 +64,11 @@ def add_to_favorite(request, product_id):
 
 @login_required
 def view_favorite(request):
-    user_favorite = Favorite.objects.get(user=request.user)
-    favorite_products = user_favorite.products.all()
+    try:
+        user_favorite = Favorite.objects.get(user=request.user)
+        favorite_products = user_favorite.products.all()
+    except Favorite.DoesNotExist:
+        favorite_products = None
     context = {
         'favorite_products': favorite_products,
     }
@@ -90,3 +84,18 @@ def remove_from_favorite(request, product_id):
     user_favorite.products.remove(product)
 
     return redirect('favorite')
+
+
+def search(request):
+    query = request.GET.get('srch')
+    if query:
+        products = Product.search_by_name(query)
+    else:
+        products = Product.objects.none()
+
+    data = {
+        'product_list': products,
+        'categories': None,
+        'category_id': None,
+    }
+    return render(request, 'catalog.html', data)
