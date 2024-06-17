@@ -14,8 +14,11 @@ def homepage(request):
 
 
 def catalog(request, category_id='all', sort=None):
-    user_favorite = Favorite.objects.filter(user=request.user).first()
-    favorite_product_ids = user_favorite.products.values_list('id', flat=True) if user_favorite else []
+    if request.user.is_authenticated:
+        user_favorite = Favorite.objects.filter(user=request.user).first()
+        favorite_product_ids = user_favorite.products.values_list('id', flat=True) if user_favorite else []
+    else:
+        favorite_product_ids = []
     if category_id == 'all':
         product_list = Product.objects.all()
     else:
@@ -115,3 +118,7 @@ def add_comment(request, product_id):
         Comment.objects.create(product=product, author=request.user, text=text)
 
     return redirect('product_detail', product_id=product_id)
+
+
+def confid(request):
+    return render(request, 'politika.html')

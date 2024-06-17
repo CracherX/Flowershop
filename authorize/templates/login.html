@@ -19,6 +19,10 @@
                             <label for="id_password">Пароль</label>
                         </div>
 
+                        {% if form.non_field_errors %}
+                            <div class="text-danger">{{ form.non_field_errors }}</div>
+                        {% endif %}
+
                         <div class="d-grid">
                             <button class="btn btn-lg btn-login text-uppercase fw-bold mb-2" type="submit">Войти</button>
                             <a href="{% url 'register' %}" class="reg-text text-center">Нет аккаунта? Зарегистрируйтесь!</a>

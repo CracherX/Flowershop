@@ -13,4 +13,5 @@ urlpatterns = [
     path('favorite/', views.view_favorite, name='favorite'),
     path('search/', views.search, name='search'),
     path('add_comment/<int:product_id>/', views.add_comment, name='add_comment'),
+    path('polics/', views.confid, name='politics'),
 ]
