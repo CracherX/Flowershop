@@ -31,6 +31,29 @@
             </a>
           </div>
         </div>
+        <div class="comments-section mt-5">
+
+          <!-- Comment Form -->
+          <form class="mb-4" method="post" action="{% url 'add_comment' product_id=product.id %}">
+                          {% csrf_token %}
+            <div class="form-group">
+              <label for="comment">Оставить комментарий:</label>
+              <input name="comment_text" class="form-control" id="comment" required>
+            </div>
+            <button type="submit" class="btn send-btn btn-primary mt-3">Отправить</button>
+          </form>
+
+          <!-- Display Comments -->
+          <div class="comments-list">
+                      {% for comment in product.comments.all %}
+            <div class="comment mb-3 p-3 border rounded">
+              <p class="mb-1"><strong>{{ comment.author.username }}</strong> <small class="text-muted">{{ comment.created_at }}</small></p>
+              <p>{{ comment.text }}</p>
+            </div>
+                      {% endfor %}
+            <!-- Add more comments as needed -->
+          </div>
+        </div>
       </div>
     </div>
    {% endblock %}

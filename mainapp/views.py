@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse, HttpResponse
+
 
 
 def homepage(request):
@@ -12,6 +14,8 @@ def homepage(request):
 
 
 def catalog(request, category_id='all', sort=None):
+    user_favorite = Favorite.objects.filter(user=request.user).first()
+    favorite_product_ids = user_favorite.products.values_list('id', flat=True) if user_favorite else []
     if category_id == 'all':
         product_list = Product.objects.all()
     else:
@@ -34,6 +38,7 @@ def catalog(request, category_id='all', sort=None):
         'product_list': products,
         'categories': Product_type.objects.all(),
         'category_id': category_id,
+        'favorite_product_ids': favorite_product_ids,
     }
 
     return render(request, 'catalog.html', data)
@@ -58,8 +63,8 @@ def add_to_favorite(request, product_id):
 
     # Добавляем товар в избранное пользователя
     user_favorite.products.add(product)
+    return HttpResponse(status=204)
 
-    return redirect('favorite')
 
 
 @login_required
@@ -99,3 +104,14 @@ def search(request):
         'category_id': None,
     }
     return render(request, 'catalog.html', data)
+
+
+@login_required
+def add_comment(request, product_id):
+    if request.method == 'POST':
+        product = Product.objects.get(pk=product_id)
+        text = request.POST.get('comment_text')
+
+        Comment.objects.create(product=product, author=request.user, text=text)
+
+    return redirect('product_detail', product_id=product_id)

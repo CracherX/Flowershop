@@ -44,3 +44,16 @@ class Favorite(models.Model):
 
     def __str__(self):
         return f'Избранные товары пользователя {self.user.username}'
+
+
+class Comment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', verbose_name='Товар')
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='Автор')
+    text = models.TextField('Текст комментария')
+    created_at = models.DateTimeField('Дата создания', auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'Отзывы'
+
+    def __str__(self):
+        return f'Отзыв от {self.author} к товару {self.product.name}'

@@ -28,12 +28,21 @@
                         <div class="card" style="width: 20rem">
                             <img src="{{ product.picture.url }}" class="card-img-top" alt="{{ product.name }}">
                             <a href="{% url 'add_to_favorite' product.pk %}">
-                            <img
+                             {% if product.pk in favorite_product_ids %}
+                                <img
+                                src="{% static 'img/heart.svg' %}"
+                                alt=""
+                                class="favorite-card"
+                                id="favorite-card"
+                              />
+                                {% else %}
+                                <img
                                 src="{% static 'img/heart-gray.svg' %}"
                                 alt=""
                                 class="favorite-card"
                                 id="favorite-card"
                               />
+                                {% endif %}
                             </a>
                             <div class="card-body">
                                 <div class="card-desc">
